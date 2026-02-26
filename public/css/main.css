@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=SN+Pro:wght@200..900&display=swap');
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --text-color: #000;
+    --secondary-text-color: #fff;
+    --error-color: #d00000;
+    --font-size: 1.6rem;
+    --font-weight: 400;
+    --border-radius: .8rem;
+    --checkbox-radius: .5rem;
+    --border-color: #e1e5e9;
+    --transition-base: .3s ease;
+    --shadow: 0 0 10px rgba(0, 0, 0, .25);
+    --gradient-color: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    font: 10px "SN Pro", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+}
+
+main {
+    min-height: 100vh;
+
+    padding: 5rem 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: var(--primary-color);
+
+    font-size: 3.2rem;
+    font-weight: 700;
+
+    text-align: center;
+}
+
+form {
+    width: 25%;
+
+    padding: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    -webkit-border-radius: var(--border-radius);
+    -moz-border-radius: var(--border-radius);
+    border-radius: var(--border-radius);
+
+    box-shadow: var(--shadow);
+}
+
+.input-wrapper {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+label {
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+}
+
+.input-wrapper input,
+.input-wrapper select,
+.input-wrapper textarea {
+    padding: .8em;
+
+    outline: none;
+    border: .2rem solid var(--border-color);
+    -webkit-border-radius: var(--border-radius);
+    -moz-border-radius: var(--border-radius);
+    border-radius: var(--border-radius);
+
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+
+    transition: border-color var(--transition-base);
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus,
+.input-wrapper textarea:focus {
+    border-color: var(--primary-color);
+}
+
+.input-wrapper option {
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+}
+
+.input-wrapper textarea {
+    height: 5.1rem;
+    min-height: 5.1rem;
+    max-height: 40rem;
+
+    resize: vertical;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+
+    cursor: pointer;
+}
+
+.custom-checkbox .text {
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+}
+
+.custom-checkbox input {
+    width: 0;
+
+    opacity: 0;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.checkmark {
+    width: 1.8rem;
+    height: 1.8rem;
+
+    border: .2rem solid var(--border-color);
+    -webkit-border-radius: var(--checkbox-radius);
+    -moz-border-radius: var(--checkbox-radius);
+    border-radius: var(--checkbox-radius);
+
+    transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.custom-checkbox input:checked + .checkmark {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.custom-checkbox:hover .checkmark {
+    border-color: var(--primary-color);
+}
+
+.btn {
+    width: 100%;
+
+    padding: .8em .7em;
+
+    background: var(--gradient-color);
+    color: var(--secondary-text-color);
+
+    outline: none;
+    border: none;
+    -webkit-border-radius: var(--border-radius);
+    -moz-border-radius: var(--border-radius);
+    border-radius: var(--border-radius);
+
+    font-size: var(--font-size);
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: transform var(--transition-base);
+}
+
+.btn:hover {
+    transform: translateY(-.2rem);
+}
+
+.radio-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.custom-radio {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.custom-radio input {
+    width: 0;
+
+    opacity: 0;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.radiomark {
+    width: 1.8rem;
+    height: 1.8rem;
+
+    border: .2rem solid var(--border-color);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+    transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.custom-radio input:checked + .radiomark {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.custom-radio:hover .radiomark {
+    border-color: var(--primary-color);
+}
+
+a {
+    color: var(--primary-color);
+
+    font-size: inherit;
+    font-weight: inherit;
+
+    text-decoration: none;
+}
+
+.custom-file {
+    width: 100%;
+}
+
+.custom-file input {
+    width: 0;
+    height: 0;
+
+    opacity: 0;
+    overflow: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.file-label {
+    display: block;
+
+    padding: .8em .7em;
+
+    background: var(--gradient-color);
+    color: var(--secondary-text-color);
+
+    outline: none;
+    border: none;
+    -webkit-border-radius: var(--border-radius);
+    -moz-border-radius: var(--border-radius);
+    border-radius: var(--border-radius);
+
+    font-size: var(--font-size);
+    font-weight: 500;
+
+    cursor: pointer;
+    text-align: center;
+    transition: transform var(--transition-base);
+}
+
+.file-label:hover {
+    transform: translateY(-.2rem);
+}
+
+.error {
+    color: var(--error-color);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+}

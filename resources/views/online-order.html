@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../public/css/main.css">
+    <title>Онлайн заказ</title>
+</head>
+<body>
+
+<form id="orderForm">
+    <h1>Онлайн заказ</h1>
+
+    <div class="input-wrapper">
+        <label for="name">Имя</label>
+        <input type="text" name="name" id="name" placeholder="Введите ваше имя">
+        <div class="error" id="nameError"></div>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="phone">Телефон</label>
+        <input type="tel" name="phone" id="phone" placeholder="+7 (___) ___-__-__">
+        <div class="error" id="phoneError"></div>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="email">Электронная почта</label>
+        <input type="email" name="email" id="email" placeholder="Введите ваш email">
+        <div class="error" id="emailError"></div>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="address">Адрес доставки</label>
+        <input type="text" name="address" id="address" placeholder="Укажите полный адрес">
+        <div class="error" id="addressError"></div>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="message">Комментарий к заказу</label>
+        <textarea name="message" id="message" placeholder="Дополнительные пожелания"></textarea>
+        <div class="error" id="messageError"></div>
+    </div>
+
+    <button type="submit" class="btn">Оформить заказ</button>
+
+    <div class="error" id="formMessage"></div>
+</form>
+
+<script>
+    document.getElementById('orderForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        document.querySelectorAll('.error').forEach(el => el.textContent = '');
+
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        let hasError = false;
+
+        if (!name) {
+            document.getElementById('nameError').textContent = 'Поле обязательно для заполнения';
+            hasError = true;
+        } else if (!/^[A-ZА-Я][a-zа-я]*$/.test(name)) {
+            document.getElementById('nameError').textContent = 'Имя должно начинаться с заглавной буквы и содержать только буквы';
+            hasError = true;
+        }
+
+        if (!phone) {
+            document.getElementById('phoneError').textContent = 'Поле обязательно для заполнения';
+            hasError = true;
+        } else if (!/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(phone)) {
+            document.getElementById('phoneError').textContent = 'Неверный формат телефона. Пример: +7 (999) 123-45-67';
+            hasError = true;
+        }
+
+        if (!email) {
+            document.getElementById('emailError').textContent = 'Поле обязательно для заполнения';
+            hasError = true;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            document.getElementById('emailError').textContent = 'Некорректный адрес электронной почты';
+            hasError = true;
+        }
+
+        if (!address) {
+            document.getElementById('addressError').textContent = 'Поле обязательно для заполнения';
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        const data = {
+            name: name,
+            phone: phone,
+            email: email,
+            address: address,
+            message: message
+        };
+
+        try {
+            const response = await fetch('/order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                document.getElementById('formMessage').textContent = 'Успешная заказ';
+            } else {
+                document.getElementById('formMessage').textContent = 'Ошибка при заказе';
+            }
+        } catch (error) {
+            document.getElementById('formMessage').textContent = 'Не удалось отправить запрос. Проверьте соединение.';
+        }
+    });
+</script>
+
+</body>
+</html>
