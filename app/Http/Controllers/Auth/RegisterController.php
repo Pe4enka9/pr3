@@ -31,6 +31,6 @@ class RegisterController extends Controller
             'password' => Hash::make($dto->password),
         ]);
 
-        return response()->json(new UserResource($user));
+        return response()->json(new UserResource($user), 201);
     }
 }

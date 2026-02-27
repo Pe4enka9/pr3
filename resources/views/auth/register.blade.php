@@ -184,8 +184,6 @@
 
                 const result = await response.json();
 
-                console.log(result);
-
                 if (response.ok) {
                     formMessage.textContent = 'Успешная регистрация';
                     formMessage.style.color = 'green';
